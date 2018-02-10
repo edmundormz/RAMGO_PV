@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
+from RAMGO_SYSTEM.db_manager import db_manager
 import unicodedata
 import ipdb
 
@@ -25,7 +26,6 @@ def insert_product_view():
 @app.route('/insert_product', methods=["POST"])
 def insert_product():
     email = request.form['email'].encode('ascii')
-    ipdb.set_trace()
     return render_template("insert_product.html")
 
 
