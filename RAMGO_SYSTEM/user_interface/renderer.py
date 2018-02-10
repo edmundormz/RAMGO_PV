@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 from flask_bootstrap import Bootstrap
 import RAMGO_SYSTEM.db_manager.db_manager as db
 
@@ -13,11 +13,6 @@ current_product_id = 0
 @app.route('/')
 def main_page():
     return render_template("index.html")
-
-
-@app.route('/home')
-def home():
-    return render_template("home.html")
 
 
 @app.route('/insert_product_view')
