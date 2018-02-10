@@ -47,17 +47,22 @@ def consult_product():
 
 @app.route('/modify_product_view', methods=["POST"])
 def modify_product_view():
-    updated_product = db.DBManager().modify_product(id_producto=request.form['id_producto'].encode('ascii'),
-                                                    nombre=request.form['nombre'].encode('ascii'),
-                                                    costo=request.form['costo'].encode('ascii'),
-                                                    precio=request.form['precio'].encode('ascii'),
-                                                    stock=request.form['cantidad'].encode('ascii'))
-    return render_template("modify_product_view.html",
-                           id_producto=updated_product[0],
-                           nombre=updated_product[1],
-                           costo=updated_product[2],
-                           precio=updated_product[3],
-                           cantidad=updated_product[4])
+    if request.form['submit'] == 'modificar':
+        updated_product = db.DBManager().modify_product(id_producto=request.form['id_producto'].encode('ascii'),
+                                                        nombre=request.form['nombre'].encode('ascii'),
+                                                        costo=request.form['costo'].encode('ascii'),
+                                                        precio=request.form['precio'].encode('ascii'),
+                                                        stock=request.form['cantidad'].encode('ascii'))
+        return render_template("modify_product_view.html",
+                               id_producto=updated_product[0],
+                               nombre=updated_product[1],
+                               costo=updated_product[2],
+                               precio=updated_product[3],
+                               cantidad=updated_product[4])
+    if request.form['submit'] == 'eliminar':
+        db.DBManager().delete_product(id_producto=request.form['id_producto'].encode('ascii'))
+        return render_template("index.html")
+
 
 
 

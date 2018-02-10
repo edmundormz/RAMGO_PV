@@ -70,6 +70,16 @@ class DBManager():
             self.db.rollback()
             print("Exception")
 
+    def delete_product(self, id_producto):
+        query = "DELETE FROM Producto WHERE Id='{0}'".format(id_producto)
+        try:
+            self.cur.execute(query)
+            self.db.commit()
+            print("Product deleted")
+        except NameError:
+            self.db.rollback()
+            print("Exception")
+
 
 if __name__ == "__main__":
     DBManager().consular_producto("Polin 4x5")
