@@ -61,7 +61,7 @@ class DBManager():
 if __name__ == "__main__":
     # DBManager().consular_producto("Polin 4x5")
 
-    DBManager().insert_product(nombre="Tabla 4x8 2a",
-                               precio="80",
+    DBManager().insert_product(nombre="Tabla 6x8 2a",
+                               precio="90",
                                costo="55",
-                               stock="158")
+                               stock="200")

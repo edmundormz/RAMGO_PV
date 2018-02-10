@@ -1,5 +1,4 @@
-import MySQLdb
-from db_manager import *
+from RAMGO_SYSTEM.db_manager.db_manager import *
 # Queries
 # INSERT INTO `Producto` (`Id`, `Nombre`, `Precio`, `Costo`, `Stock`) VALUES ('8796', 'Polin 4x4', '115', '85', '100')
 
