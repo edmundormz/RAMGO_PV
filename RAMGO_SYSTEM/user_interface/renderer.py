@@ -1,5 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap
+import unicodedata
+import ipdb
 
 app = Flask(__name__)
 Bootstrap(app)
@@ -15,8 +17,15 @@ def home():
     return render_template("home.html")
 
 
-@app.route('/insert_product')
+@app.route('/insert_product_view')
+def insert_product_view():
+    return render_template("insert_product.html")
+
+
+@app.route('/insert_product', methods=["POST"])
 def insert_product():
+    email = request.form['email'].encode('ascii')
+    ipdb.set_trace()
     return render_template("insert_product.html")
 
 
