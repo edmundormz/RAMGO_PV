@@ -42,7 +42,6 @@ class DBManager():
             self.cur.execute(query)
             self.db.commit()
             print("Product inserted")
-            ipdb.set_trace()
         except NameError:
             self.db.rollback()
             print("Exception")
