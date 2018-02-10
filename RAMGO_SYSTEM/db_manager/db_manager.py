@@ -11,16 +11,13 @@ class DBManager():
                              db="RAMGO_1")
         self.cur = self.db.cursor()
 
-    """
-    def _get_columns_names(self, table_name):
-        query = "select column_name from information_schema.columns where table_name='{0}'".format(table_name)
-        self.cur.execute(query)
-        columns = self.cur.fetchall()
-        return columns
-    """
-
     def read_all(self):
         pass
+    #
+    # def get_product_id(self, nombre_producto):
+    #     query = "SELECT Producto.Id FROM Producto WHERE Producto.Nombre = '{nombre}'".format(nombre=nombre_producto)
+    #     id_producto = self.cur.execute(query)
+    #     return str(id_producto)
 
     def insert_product(self, **kwargs):
         """
@@ -51,16 +48,29 @@ class DBManager():
         try:
             self.cur.execute(query)
             db_response = self.cur.fetchone()
-            ipdb.set_trace()
+            return db_response
+        except NameError:
+            self.db.rollback()
+            print("Exception")
+
+    def modify_product(self, **kwargs):
+        # UPDATE Producto SET Nombre='MDF 18mm', Costo=120, Precio=200, Stock=28 WHERE Nombre='MDF 16mm'
+        query = "UPDATE Producto SET Nombre='{nombre}', Costo='{costo}', Precio='{precio}', Stock='{stock}' " \
+                "WHERE Id='{id_producto}'".format(id_producto=kwargs.get('id_producto'),
+                                                  nombre=kwargs.get('nombre'),
+                                                  precio=kwargs.get('precio'),
+                                                  costo=kwargs.get('costo'),
+                                                  stock=kwargs.get('stock'))
+        try:
+            self.cur.execute(query)
+            self.db.commit()
+            print("Product updated")
+            return self.consular_producto(nombre_producto=kwargs.get('nombre'))
         except NameError:
             self.db.rollback()
             print("Exception")
 
 
 if __name__ == "__main__":
-    # DBManager().consular_producto("Polin 4x5")
+    DBManager().consular_producto("Polin 4x5")
 
-    DBManager().insert_product(nombre="Tabla 6x8 2a",
-                               precio="90",
-                               costo="55",
-                               stock="200")
