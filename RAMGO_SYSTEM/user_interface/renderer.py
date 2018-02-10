@@ -1,6 +1,8 @@
 from flask import Flask, render_template
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
+Bootstrap(app)
 
 
 @app.route('/')
@@ -13,10 +15,14 @@ def home():
     return render_template("home.html")
 
 
-@app.route('/insert')
-def about():
-    return render_template("about.html")
+@app.route('/insert_product')
+def insert_product():
+    return render_template("insert_product.html")
 
+
+@app.route('/bootstrap')
+def bootstrap():
+    return render_template("bootstrap_example.html")
 
 
 if __name__ == "__main__":
